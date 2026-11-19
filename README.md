@@ -42,4 +42,4 @@ Una suite correcta hace que **al menos un test falle** en este modo.
 
 Test que detectó el bug: test_mae_basic_case.
 
-Bug identificado: la versión mutante de mae calcula el promedio de los errores con signo en lugar del promedio de sus valores absolutos. Para y_true=[1, 2, 3] e y_pred=[2, 2, 1], retorna 0.3333 en lugar del MAE correcto de 1.0.
+Bug: la versión mutante de mae calcula el promedio de los errores con signo en lugar del promedio de sus valores absolutos. Para y_true=[1, 2, 3] e y_pred=[2, 2, 1], retorna 0.3333 en lugar del MAE correcto de 1.0.
