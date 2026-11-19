@@ -156,7 +156,13 @@ class TestMetricsUtils(unittest.TestCase):
         - Llamar a confusion_matrix con labels=["a", "b"]
         - Verificar que se lanza un ValueError (usar self.assertRaises)
         """
-        self.fail("TODO: implementar este test")
+        y_true = ["a", "b"]
+        y_pred = ["a", "c"]
+        labels = ["a", "b"]
+        metrics = MetricsUtils()
+
+        with self.assertRaises(ValueError):
+            metrics.confusion_matrix(y_true, y_pred, labels)
 
 
 if __name__ == "__main__":
