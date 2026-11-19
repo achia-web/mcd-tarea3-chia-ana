@@ -2,7 +2,7 @@ import unittest
 
 import pandas as pd
 import pandas.testing as pdt
-
+import numpy as np
 from src.feature_encoder import FeatureEncoder
 
 
@@ -69,7 +69,24 @@ class TestFeatureEncoder(unittest.TestCase):
         - Verificar que cada fila suma exactamente 1 en las columnas indicadoras
           (usar numpy.testing.assert_array_equal o comparar con una lista con self.assertEqual)
         """
-        self.fail("TODO: implementar este test")
+        df = make_sample_df()
+
+        encoder = FeatureEncoder()
+        resultado = encoder.one_hot(df, "city")
+
+        self.assertNotIn("city", resultado.columns)
+
+        self.assertIn("city_BOG", resultado.columns)
+        self.assertIn("city_LPZ", resultado.columns)
+        self.assertIn("city_SCL", resultado.columns)
+
+        columnas_one_hot = ["city_BOG", "city_LPZ", "city_SCL"]
+        suma_por_fila = resultado[columnas_one_hot].sum(axis=1)
+
+        np.testing.assert_array_equal(
+            suma_por_fila.to_numpy(),
+            np.ones(len(df), dtype=int)
+        )
 
     def test_one_hot_raises_keyerror_for_unknown_column(self):
         """Test que verifica que one_hot lanza KeyError con una columna inexistente.
