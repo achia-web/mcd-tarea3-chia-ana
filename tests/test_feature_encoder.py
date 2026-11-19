@@ -155,7 +155,16 @@ class TestFeatureEncoder(unittest.TestCase):
           (usar self.assertEqual comparando list(result["age_bin"]))
         - Verificar que las columnas originales siguen presentes (usar self.assertIn)
         """
-        self.fail("TODO: implementar este test")
+        df = make_sample_df()
+
+        encoder = FeatureEncoder()
+
+        resultado = encoder.bin_numeric(df,col="age",edges=[0, 18, 65, 120],labels=["young", "adult", "senior"])
+
+        self.assertEqual(list(resultado["age_bin"]),["young", "adult", "senior", "adult"])
+
+        for columna in df.columns:
+            self.assertIn(columna, resultado.columns)
 
     def test_bin_numeric_raises_typeerror_for_non_numeric_column(self):
         """Test que verifica que bin_numeric lanza TypeError con una columna de texto.
