@@ -192,7 +192,16 @@ class TestFeatureEncoder(unittest.TestCase):
           (usar pandas.testing.assert_frame_equal)
         - Verificar que "age_bin" NO está en las columnas del original (usar self.assertNotIn)
         """
-        self.fail("TODO: implementar este test")
+        df = make_sample_df()
+        df_copia = df.copy()
+
+        encoder = FeatureEncoder()
+
+        encoder.bin_numeric(df,col="age",edges=[0, 18, 65, 120],labels=["young", "adult", "senior"])
+
+        pd.testing.assert_frame_equal(df, df_copia)
+
+        self.assertNotIn("age_bin", df.columns)
 
 
 if __name__ == "__main__":
