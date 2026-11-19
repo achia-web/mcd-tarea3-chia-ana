@@ -137,7 +137,15 @@ class TestMetricsUtils(unittest.TestCase):
           (para el ejemplo: [[0, 2], [0, 1]])
         - Verificar que la suma de todas las celdas es igual a len(y_true) (usar self.assertEqual)
         """
-        self.fail("TODO: implementar este test")
+        y_true = [0, 0, 1]
+        y_pred = [1, 1, 1]
+        labels = [0, 1]
+        metrics = MetricsUtils()
+        resultado = metrics.confusion_matrix(y_true, y_pred,labels)
+        esperado = np.array([[0, 2],[0, 1]])
+
+        np.testing.assert_array_equal(resultado, esperado)
+        self.assertEqual(resultado.sum(), len(y_true))
 
     def test_confusion_matrix_raises_for_unknown_label(self):
         """Test que verifica que confusion_matrix lanza ValueError cuando y_true o
