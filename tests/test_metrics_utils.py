@@ -49,14 +49,18 @@ class TestMetricsUtils(unittest.TestCase):
         npt.assert_array_equal(result, expected)
 
     def test_rmse_raises_for_length_mismatch(self):
-        """Test que verifica que rmse lanza ValueError cuando y_true e y_pred
+        """Test que verifica que rmse lanza ValueError cuando y_true e y_pre
         tienen largos distintos.
 
         Escenario esperado:
-        - Crear y_true con 3 valores e y_pred con 2 valores
+        - Crear y_true con 3 valores e y_pre con 2 valores
         - Llamar a rmse y verificar que se lanza un ValueError (usar self.assertRaises)
         """
-        self.fail("TODO: implementar este test")
+        y_true = [1, 2,3]
+        y_pred= [1, 2]
+        metrics = MetricsUtils()
+        with self.assertRaises(ValueError):
+            metrics.rmse(y_true,y_pred)
 
     def test_mae_basic_case(self):
         """Test que verifica que mae calcula correctamente el error absoluto medio.
