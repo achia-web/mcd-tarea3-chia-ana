@@ -118,7 +118,12 @@ class TestMetricsUtils(unittest.TestCase):
         - Llamar a accuracy con dos listas vacías
         - Verificar que se lanza un ValueError (usar self.assertRaises)
         """
-        self.fail("TODO: implementar este test")
+        y_true = []
+        y_pred = []
+        metrics = MetricsUtils()
+
+        with self.assertRaises(ValueError):
+            metrics.accuracy(y_true, y_pred)
 
     def test_confusion_matrix_rows_are_true_labels(self):
         """Test que verifica la orientación de la matriz de confusión
