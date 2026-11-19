@@ -102,7 +102,14 @@ class TestMetricsUtils(unittest.TestCase):
         - Llamar a accuracy y verificar que el resultado es 0.75 (usar self.assertAlmostEqual)
         - Verificar que el resultado está en el rango [0, 1] (usar self.assertGreaterEqual y self.assertLessEqual)
         """
-        self.fail("TODO: implementar este test")
+        y_true = [1, 2, 3,4]
+        y_pred = [1, 2, 3,5]
+        metrics = MetricsUtils()
+        resultado = metrics.accuracy(y_true, y_pred)
+
+        self.assertAlmostEqual(resultado, 0.75)
+        self.assertGreaterEqual(resultado, 0)
+        self.assertLessEqual(resultado, 1)
 
     def test_accuracy_raises_for_empty_inputs(self):
         """Test que verifica que accuracy lanza ValueError con secuencias vacías.
