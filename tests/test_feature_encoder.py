@@ -117,11 +117,7 @@ class TestFeatureEncoder(unittest.TestCase):
         encoder = FeatureEncoder()
         resultado = encoder.label_encode(df, "city")
 
-        mapping = {
-            "BOG": 0,
-            "LPZ": 1,
-            "SCL": 2
-        }
+        mapping = {"BOG": 0,"LPZ": 1,"SCL": 2}
 
         esperado = df["city"].map(mapping)
         esperado.name = "city_code"
@@ -139,7 +135,14 @@ class TestFeatureEncoder(unittest.TestCase):
           (falta "BOG")
         - Verificar que se lanza un ValueError (usar self.assertRaises)
         """
-        self.fail("TODO: implementar este test")
+        df = make_sample_df()
+
+        mapping = {"SCL": 0,"LPZ": 1}
+
+        encoder = FeatureEncoder()
+
+        with self.assertRaises(ValueError):
+            encoder.label_encode(df, "city", mapping=mapping)
 
     def test_bin_numeric_assigns_expected_labels(self):
         """Test que verifica que bin_numeric agrega la columna de intervalos correcta.
